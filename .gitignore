@@ -1,0 +1,13 @@
+.DS_Store
+*.swp
+*~
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+vendor/bundle
+.bundle/
+log/
+tmp/
+coverage/

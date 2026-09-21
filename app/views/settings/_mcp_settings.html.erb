@@ -1,0 +1,26 @@
+<fieldset class="box tabular">
+  <legend><%= l(:label_mcp_settings) %></legend>
+
+  <p>
+    <%= hidden_field_tag 'settings[enabled]', '0', id: 'settings_enabled_off' %>
+    <%= label_tag 'settings_enabled', l(:label_mcp_enabled) %>
+    <%= check_box_tag 'settings[enabled]', '1', @settings['enabled'].to_s == '1', id: 'settings_enabled' %>
+    <em class="info"><%= l(:text_mcp_enabled_info) %></em>
+  </p>
+
+  <p>
+    <%= hidden_field_tag 'settings[read_only]', '0', id: 'settings_read_only_off' %>
+    <%= label_tag 'settings_read_only', l(:label_mcp_read_only) %>
+    <%= check_box_tag 'settings[read_only]', '1', @settings['read_only'].to_s != '0', id: 'settings_read_only' %>
+    <em class="info"><%= l(:text_mcp_read_only_info) %></em>
+  </p>
+
+  <p>
+    <%= label_tag 'settings_max_results', l(:label_mcp_max_results) %>
+    <%= number_field_tag 'settings[max_results]', @settings['max_results'].presence || 25, min: 1, max: 50, id: 'settings_max_results' %>
+    <em class="info"><%= l(:text_mcp_max_results_info) %></em>
+  </p>
+
+  <p class="info"><%= l(:text_mcp_rest_api_hint) %></p>
+  <p class="info"><%= l(:text_mcp_security_hint) %></p>
+</fieldset>

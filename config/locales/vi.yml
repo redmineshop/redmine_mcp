@@ -1,0 +1,10 @@
+vi:
+  label_mcp_settings: Máy chủ MCP
+  label_mcp_enabled: Bật endpoint MCP
+  text_mcp_enabled_info: Mặc định tắt. Khi bật, client POST JSON-RPC tới /mcp kèm API key Redmine.
+  label_mcp_read_only: Chế độ chỉ đọc
+  text_mcp_read_only_info: Mặc định bật. Ẩn tool ghi (cập nhật wiki) khỏi tools/list và từ chối gọi chúng.
+  label_mcp_max_results: Số kết quả tối đa mỗi tool danh sách
+  text_mcp_max_results_info: Áp dụng cho search_issues, list_projects, list_users, list_wiki_pages. Trần tuyệt đối là 50.
+  text_mcp_rest_api_hint: Administration → Settings → API phải bật Enable REST web service. Tool chạy với quyền user của API key.
+  text_mcp_security_hint: Dùng user bot riêng, không dùng key administrator. Không ghi API key hay payload tool vào log.
