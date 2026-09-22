@@ -4,15 +4,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![CI](https://github.com/redmineshop/redmine_mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/redmineshop/redmine_mcp/actions/workflows/ci.yml)
 
-**Last maintained:** 2026-09-21
+**Last maintained:** 2026-09-22
 
 **Source on GitHub:** [github.com/redmineshop/redmine_mcp](https://github.com/redmineshop/redmine_mcp)
 
+MCP server inside Redmine for Cursor and Claude.
+
 An MCP server that runs **inside Redmine**. Cursor Desktop, Cursor Cloud Agent, and Claude Desktop call `POST /mcp` with a Redmine API key. Tools run as that user and honor `allowed_to?` / `.visible`.
 
-Community edition is **free forever** — no license key, no phone-home, **no email to clone**.
-
-The public repo may still be empty until the maintainer publishes this folder with `publish-community-plugins.sh`. Until then, clone from the RedmineShop monorepo path `demo/plugins/redmine_mcp`.
+Community edition is free — no license key and no phone-home. Clone from this repository.
 
 ## Features
 
@@ -25,16 +25,21 @@ The public repo may still be empty until the maintainer publishes this folder wi
 - Result cap (default 25, hard max 50)
 - English + Vietnamese settings strings
 
-This is not a hosted LLM and not the planned AI Assistant suite. It does not create or update issues. It does not edit storefront catalog or Markdown.
+This is not a hosted model. It does not create or update issues.
 
 ## Compatibility
 
-| Redmine | Ruby | Database | Status |
-|---------|------|----------|--------|
-| 6.x     | 3.2+ | MySQL 8 / PostgreSQL | Targeted — **untested** (no published QA matrix) |
-| 5.1.x   | 3.1+ | MySQL 8 / PostgreSQL | Targeted — **untested** |
+Declared follows `requires_redmine version_or_higher: '5.1'` for 5.1.x and 6.x. Redmine 7.0 is not a claimed target. Tested means a run pinned to that Redmine line. The demo image is official `redmine:latest` (tag not pinned), so a demo boot is not a pass for a specific row.
 
-The plugin declares `requires_redmine version_or_higher: '5.1'`. Do not treat catalog versions as tested cells. The demo quality harness is **one** Redmine image, not a 5.1 / 6.x matrix. OAuth2 is not included (Redmine 6.1+ only).
+| Redmine | Declared | Tested |
+|---------|----------|--------|
+| 5.0.x   | No       | No — unverified |
+| 5.1.x   | Yes      | No — unverified |
+| 6.0.x   | Yes      | No — unverified |
+| 6.1.x   | Yes      | No — unverified |
+| 7.0.x   | No       | No — unverified |
+
+OAuth 2.0 client login is not included. MCP authenticates with a Redmine API key.
 
 ## Installation
 
@@ -49,13 +54,6 @@ ls redmine_mcp/init.rb
 ```
 
 Do not rename the plugin directory. If you download a GitHub ZIP, rename the unpacked `redmine_mcp-main` folder to `redmine_mcp`.
-
-If the public repository is not published yet:
-
-```bash
-# From the RedmineShop monorepo
-cp -R demo/plugins/redmine_mcp /path/to/redmine/plugins/redmine_mcp
-```
 
 ### 2. Restart Redmine
 
@@ -134,7 +132,7 @@ Use an HTTP MCP transport that can send a custom header (or a small local proxy 
 
 ## Screenshots
 
-Plugin settings (demo Redmine, plugin quality harness):
+Plugin settings (demo Redmine):
 
 ![Redmine MCP settings](screenshots/plugin-settings.png)
 
@@ -146,7 +144,7 @@ Wiki page written with `update_wiki_page` after read-only was turned off (local/
 
 ![Agent notes wiki page](screenshots/wiki-agent-notes.png)
 
-Screenshot refresh lives in the private `redmineshop/redmineshop` harness. A public clone cannot run it.
+Images are crops from a demo Redmine. The Redmine version in the capture was not recorded. A full-page screenshot is still TODO.
 
 ## Uninstall
 
@@ -160,25 +158,15 @@ Unit + functional (beyond `ruby -c`):
 bundle exec rake redmine:plugins:test NAME=redmine_mcp RAILS_ENV=test
 ```
 
-On the private `redmineshop/redmineshop` demo stack (not this public clone):
+Public GitHub Actions (`.github/workflows/ci.yml`) runs Ruby syntax checks only (`ruby -c`).
 
-```bash
-PLUGIN_NAME=redmine_mcp ./demo/scripts/run-sso-plugin-tests.sh
-```
+## Limits
 
-### Quality harness (demo + E2E)
-
-E2E lives in the **private** `redmineshop/redmineshop` harness (`docker-compose.demo.yml` + Playwright). This public GitHub repo is the plugin only — it does not ship that compose file, and a public clone cannot open private harness docs.
-
-Install and smoke this plugin on your own Redmine: [Redmine MCP product page](https://redmineshop.com/products/redmine-mcp).
-
-| Bar | Status |
-| --- | --- |
-| Automated tests beyond `ruby -c` | **Verified** — `test/unit` + `test/functional` in this repo |
-| Installed + enabled on demo Redmine | **Verified** — mounted via `demo/plugins/` on the private monorepo demo stack; seed enables `/mcp` on `plugin-qa` |
-| E2E primary happy path | **Verified** — Playwright on that private harness (`tools/list`, issue read, wiki read/update) |
-| UI screenshot in README | **Verified** — `screenshots/*.png` from that spec |
-| Redmine 5.1 / 6.x matrix | **Declared / untested** — this harness is one demo image, not a QA matrix |
+- Not a hosted model. Issue tools are read-only. Wiki updates exist only when read-only mode is off.
+- Result cap is 25 by default and 50 at most.
+- The endpoint stays off until an administrator enables it. Do not put an administrator API key in an AI client.
+- MiniTest does not boot Redmine 5.0, 5.1, 6.0, 6.1, or 7.0.
+- Product page: https://redmineshop.com/products/redmine-mcp
 
 ## Community support
 
