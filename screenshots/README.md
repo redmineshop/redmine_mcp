@@ -1,9 +1,11 @@
 # Screenshots
 
-Crops from a demo Redmine. The Redmine version in the capture was not recorded. A full-page screenshot is still TODO.
+PNG files in this folder are captured by the private `redmineshop/redmineshop` plugin quality harness (`demo/e2e/tests/redmine_mcp.spec.js`). Viewport 1440×900, deviceScaleFactor 1, full page. A public clone of this plugin cannot run that compose file.
 
-- `plugin-settings.png` — Administration → Plugins → Configure Redmine MCP
+Expected files after a harness run:
+
+- `mcp-settings.png` — Administration → Plugins → Configure Redmine MCP (no API key on this screen). `plugin-settings.png` is the same image.
 - `admin-plugins.png` — Administration → Plugins listing Redmine MCP
 - `wiki-agent-notes.png` — wiki page updated through `update_wiki_page` when read-only is off
 
-These files do not prove a specific Redmine 5.0 / 5.1 / 6.0 / 6.1 / 7.0 cell. See the compatibility table in the README.
+Not produced here: `mcp-client.png` (no Cursor/Claude window in this harness) and `architecture.png` (no diagram asset).
