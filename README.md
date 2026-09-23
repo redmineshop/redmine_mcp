@@ -132,19 +132,18 @@ Use an HTTP MCP transport that can send a custom header (or a small local proxy 
 
 ## Screenshots
 
-Plugin settings (demo Redmine):
+Plugin settings a Redmine administrator uses to enable `/mcp` (demo Redmine). This screen has no API key field.
 
-![Redmine MCP settings](screenshots/plugin-settings.png)
-
-Administration → Plugins:
+![Redmine MCP settings](screenshots/mcp-settings.png)
 
 ![Redmine MCP installed](screenshots/admin-plugins.png)
 
-Wiki page written with `update_wiki_page` after read-only was turned off (local/demo only):
+Wiki page written with `update_wiki_page` after read-only was turned off (local demo only):
 
 ![Agent notes wiki page](screenshots/wiki-agent-notes.png)
 
-Images are crops from a demo Redmine. The Redmine version in the capture was not recorded. A full-page screenshot is still TODO.
+Screenshot refresh lives in the private `redmineshop/redmineshop` harness. A public clone cannot run it.
+
 
 ## Uninstall
 
