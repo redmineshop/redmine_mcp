@@ -85,6 +85,35 @@ module RedmineMcp
             handler: :get_issue
           ),
           Tool.new(
+            name: 'list_issue_templates',
+            description: 'List Issue Templates the current user can use. Optional project_id limits the list to that project (including global templates when the project applies them). Returns available: false when Issue Templates is not installed.',
+            input_schema: object_schema(
+              'project_id' => { 'type' => 'string', 'description' => 'Optional project id or identifier' }
+            ),
+            write: false,
+            handler: :list_issue_templates
+          ),
+          Tool.new(
+            name: 'get_issue_template',
+            description: 'Get one Issue Template the current user can use: subject, description, trackers, checklist lines, and whitelisted custom fields only.',
+            input_schema: object_schema(
+              { 'id' => { 'type' => 'integer', 'description' => 'Issue template id' } },
+              ['id']
+            ),
+            write: false,
+            handler: :get_issue_template
+          ),
+          Tool.new(
+            name: 'list_issue_checklists',
+            description: 'List checklist items on a visible issue. Returns available: false when Issue Checklists is not installed.',
+            input_schema: object_schema(
+              { 'issue_id' => { 'type' => 'integer', 'description' => 'Issue id' } },
+              ['issue_id']
+            ),
+            write: false,
+            handler: :list_issue_checklists
+          ),
+          Tool.new(
             name: 'list_enumerations',
             description: 'List trackers, issue statuses, priorities, and time-entry activities.',
             input_schema: object_schema,
@@ -145,6 +174,57 @@ module RedmineMcp
             ),
             write: true,
             handler: :update_wiki_page
+          ),
+          Tool.new(
+            name: 'add_issue_note',
+            description: 'Add a note to a visible issue. Hidden while the plugin is in read-only mode. Does not change the issue description or status.',
+            input_schema: object_schema(
+              {
+                'issue_id' => { 'type' => 'integer', 'description' => 'Issue id' },
+                'notes' => { 'type' => 'string', 'description' => 'Note text. Maximum 10000 characters.' }
+              },
+              %w[issue_id notes]
+            ),
+            write: true,
+            handler: :add_issue_note
+          ),
+          Tool.new(
+            name: 'set_checklist_item_done',
+            description: 'Set a checklist item done or not done. Requires manage checklists on the issue project. Pass item_id or position. Hidden while the plugin is in read-only mode.',
+            input_schema: object_schema(
+              {
+                'issue_id' => { 'type' => 'integer', 'description' => 'Issue id' },
+                'item_id' => { 'type' => 'integer', 'description' => 'Checklist item id. Used when present.' },
+                'position' => { 'type' => 'integer', 'description' => '1-based position when item_id is omitted' },
+                'is_done' => { 'type' => 'boolean', 'description' => 'true to check, false to uncheck' }
+              },
+              %w[issue_id is_done]
+            ),
+            write: true,
+            handler: :set_checklist_item_done
+          ),
+          Tool.new(
+            name: 'create_issue_from_template',
+            description: 'Create an issue from an Issue Template the user can use on the project. Optional overrides: subject, description, tracker_id. Hidden while the plugin is in read-only mode.',
+            input_schema: object_schema(
+              {
+                'project_id' => { 'type' => 'string', 'description' => 'Project id or identifier' },
+                'template_id' => { 'type' => 'integer', 'description' => 'Issue template id' },
+                'overrides' => {
+                  'type' => 'object',
+                  'description' => 'Optional subject, description, or tracker_id',
+                  'properties' => {
+                    'subject' => { 'type' => 'string' },
+                    'description' => { 'type' => 'string' },
+                    'tracker_id' => { 'type' => 'integer' }
+                  },
+                  'additionalProperties' => false
+                }
+              },
+              %w[project_id template_id]
+            ),
+            write: true,
+            handler: :create_issue_from_template
           )
         ]
       end

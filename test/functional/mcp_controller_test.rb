@@ -64,7 +64,10 @@ class McpControllerTest < Redmine::ControllerTest
     names = json_body['result']['tools'].map { |tool| tool['name'] }
     assert_includes names, 'search_issues'
     assert_includes names, 'get_issue'
+    assert_includes names, 'list_issue_templates'
     assert_not_includes names, 'update_wiki_page'
+    assert_not_includes names, 'add_issue_note'
+    assert_not_includes names, 'create_issue_from_template'
   end
 
   def test_bearer_token_auth
@@ -136,6 +139,9 @@ class McpControllerTest < Redmine::ControllerTest
     )
     names = json_body['result']['tools'].map { |tool| tool['name'] }
     assert_includes names, 'update_wiki_page'
+    assert_includes names, 'add_issue_note'
+    assert_includes names, 'set_checklist_item_done'
+    assert_includes names, 'create_issue_from_template'
 
     mcp_post(
       'tools/call',

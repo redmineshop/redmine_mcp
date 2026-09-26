@@ -2,6 +2,18 @@
 
 All notable changes to this plugin.
 
+## [1.1.0] — 2026-09-26
+
+### Added
+
+- Read tools: `list_issue_templates`, `get_issue_template`, `list_issue_checklists` (clear message when Issue Templates or Issue Checklists is not installed)
+- Write tools, hidden while read-only mode is on: `add_issue_note`, `set_checklist_item_done`, `create_issue_from_template`
+- `test/run-redmine-7.0.1.sh` runs the MiniTest suite on the official `redmine:7.0.1` image
+
+### Changed
+
+- Read-only mode still defaults to on. Write tools stay out of `tools/list` until an admin turns it off.
+
 ## [1.0.0] — 2026-09-21
 
 First Community release. Free forever, no license key, no phone-home.

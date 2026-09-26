@@ -79,7 +79,8 @@ module RedmineMcp
         'capabilities' => { 'tools' => { 'listChanged' => false } },
         'serverInfo' => { 'name' => 'redmine-mcp', 'version' => VERSION },
         'instructions' => 'Redmine MCP. Tools run as the API key user with Redmine permissions. ' \
-                          'Issue tools are read-only. Wiki update is hidden while the plugin is read-only.'
+                          'Read-only mode hides write tools: wiki update, issue notes, checklist ticks, ' \
+                          'and create issue from a template.'
       }
     end
 

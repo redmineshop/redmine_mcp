@@ -6,6 +6,7 @@ require_relative 'lib/redmine_mcp/version'
 require_relative 'lib/redmine_mcp/settings'
 require_relative 'lib/redmine_mcp/protocol'
 require_relative 'lib/redmine_mcp/tool_registry'
+require_relative 'lib/redmine_mcp/runbook_tools'
 require_relative 'lib/redmine_mcp/tools'
 require_relative 'lib/redmine_mcp/server'
 

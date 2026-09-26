@@ -13,12 +13,25 @@ class RedmineMcpToolRegistryTest < ActiveSupport::TestCase
     assert_not_includes names, 'create_issue'
     assert_not_includes names, 'update_issue'
     assert_not_includes names, 'add_issue_note'
+    assert_not_includes names, 'set_checklist_item_done'
+    assert_not_includes names, 'create_issue_from_template'
+    assert_includes names, 'list_issue_templates'
+    assert_includes names, 'get_issue_template'
+    assert_includes names, 'list_issue_checklists'
   end
 
-  def test_write_mode_includes_wiki_update_only
+  def test_write_mode_includes_gated_write_tools
     names = RedmineMcp::ToolRegistry.visible(read_only: false).map(&:name)
     assert_includes names, 'update_wiki_page'
-    assert_equal ['update_wiki_page'], RedmineMcp::ToolRegistry.all.select(&:write).map(&:name)
+    assert_includes names, 'add_issue_note'
+    assert_includes names, 'set_checklist_item_done'
+    assert_includes names, 'create_issue_from_template'
+    assert_equal %w[
+      add_issue_note
+      create_issue_from_template
+      set_checklist_item_done
+      update_wiki_page
+    ], RedmineMcp::ToolRegistry.all.select(&:write).map(&:name).sort
   end
 
   def test_find_returns_nil_for_hidden_write_tool

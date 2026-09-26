@@ -3,8 +3,8 @@ en:
   label_mcp_enabled: Enable MCP endpoint
   text_mcp_enabled_info: Off by default. When enabled, clients POST JSON-RPC to /mcp with a Redmine API key.
   label_mcp_read_only: Read-only mode
-  text_mcp_read_only_info: On by default. Hides write tools (wiki update) from tools/list and rejects them.
+  text_mcp_read_only_info: On by default. Hides write tools from tools/list and rejects them. Write tools are wiki update, issue notes, checklist ticks, and create issue from a template.
   label_mcp_max_results: Maximum results per list tool
-  text_mcp_max_results_info: Cap for search_issues, list_projects, list_users, and list_wiki_pages. Absolute maximum is 50.
+  text_mcp_max_results_info: Cap for search_issues, list_projects, list_users, list_wiki_pages, and list_issue_templates. Absolute maximum is 50.
   text_mcp_rest_api_hint: Administration → Settings → API must have Enable REST web service checked. Tools run as the API key user.
   text_mcp_security_hint: Use a dedicated bot user, not an administrator key. Do not log API keys or tool payloads.

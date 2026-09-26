@@ -2,6 +2,8 @@
 
 module RedmineMcp
   module Tools
+    extend RunbookTools
+
     module_function
 
     def whoami(_args, user)

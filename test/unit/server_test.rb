@@ -43,7 +43,11 @@ class RedmineMcpServerTest < ActiveSupport::TestCase
   def test_tools_list_hides_write_when_read_only
     names = tool_names_from(@server.handle('jsonrpc' => '2.0', 'id' => 3, 'method' => 'tools/list'))
     assert_includes names, 'whoami'
+    assert_includes names, 'list_issue_templates'
     assert_not_includes names, 'update_wiki_page'
+    assert_not_includes names, 'add_issue_note'
+    assert_not_includes names, 'set_checklist_item_done'
+    assert_not_includes names, 'create_issue_from_template'
   end
 
   def test_whoami_omits_email_and_api_key
