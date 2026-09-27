@@ -12,8 +12,6 @@ An MCP server that runs **inside Redmine**. Cursor Desktop, Cursor Cloud Agent, 
 
 Community edition is **free forever** — no license key, no phone-home, **no email to clone**.
 
-The public repo may still be empty until the maintainer publishes this folder with `publish-community-plugins.sh`. Until then, clone from the RedmineShop monorepo path `demo/plugins/redmine_mcp`.
-
 ## Features
 
 - One HTTP endpoint: `POST /mcp` (JSON-RPC 2.0). **Off until an admin enables it.**
@@ -53,13 +51,6 @@ ls redmine_mcp/init.rb
 ```
 
 Do not rename the plugin directory. If you download a GitHub ZIP, rename the unpacked `redmine_mcp-main` folder to `redmine_mcp`.
-
-If the public repository is not published yet:
-
-```bash
-# From the RedmineShop monorepo
-cp -R demo/plugins/redmine_mcp /path/to/redmine/plugins/redmine_mcp
-```
 
 ### 2. Restart Redmine
 
